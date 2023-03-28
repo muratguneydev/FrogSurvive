@@ -1,8 +1,9 @@
 {
-    "name": "Player",
+    "name": "FrogPlayer",
     "rootNamespace": "",
     "references": [
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+        "GUID:d0094f470c3b04cba87bb7f24b7d69e8"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

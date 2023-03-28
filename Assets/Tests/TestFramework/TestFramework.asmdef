@@ -1,3 +1,16 @@
 {
-	"name": "TestFramework"
+    "name": "TestFramework",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d0094f470c3b04cba87bb7f24b7d69e8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
