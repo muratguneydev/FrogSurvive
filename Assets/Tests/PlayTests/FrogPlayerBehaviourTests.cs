@@ -1,11 +1,10 @@
 using System.Collections;
-using FrogSurvive.Player;
+using FrogSurvive.FrogPlayer;
 using NUnit.Framework;
 using Scripts;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Zenject;
-
 
 public class FrogPlayerBehaviourTests : ZenjectIntegrationTestFixture
 {
@@ -14,19 +13,17 @@ public class FrogPlayerBehaviourTests : ZenjectIntegrationTestFixture
 	{
 		//Arrange
 		PreInstall();
-		//const int BirdUpVelocityUnitsPerSecond = 10;
-		//const int HeightTolerance = 3;
+		const int FrogHorizontalVelocityUnitsPerSecond = 10;
 		// Container.Install<CoreInstaller>();
 
 
 		// var pipePrefab = PipePrefab.Create();
-		// var pipeSettings = new PipeSettings(pipePrefab, -23f, 5);
 		// var pipeSpawnerSettings = new PipeSpawnerSettings();
 		// Container.Bind<PipeSettings>().FromInstance(pipeSettings).AsSingle();
 		// Container.Bind<PipeSpawnerSettings>().FromInstance(pipeSpawnerSettings).AsSingle();
 		// PipeInstaller.Install(Container, pipeSettings, pipeSpawnerSettings);
 
-		// BirdInstaller.Install(Container, new BirdSettings(BirdUpVelocityUnitsPerSecond));
+		FrogPlayerInstaller.Install(Container, new FrogPlayerSettings(FrogHorizontalVelocityUnitsPerSecond));
 
 		var rightKeyInputStub = new KeyInputStub(1);
 		Container.Rebind<KeyInput>().FromInstance(rightKeyInputStub);//For non-interface types, rebind cannot be AsSingle.
