@@ -14,5 +14,8 @@ public class FrogPlayerInstaller : Installer<FrogPlayerSettings, FrogPlayerInsta
 	{
 		Container.Bind<HorizontalMover>().AsSingle();
 		Container.BindInstance(_frogPlayerSettings.HorizontalVelocity).WhenInjectedInto<HorizontalMover>();
+
+		Container.Bind<SpriteHorizontalDirectionManager>().AsSingle();
+		
 	}
 }

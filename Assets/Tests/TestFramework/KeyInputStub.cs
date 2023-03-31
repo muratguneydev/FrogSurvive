@@ -1,21 +1,54 @@
 using Scripts;
+using UnityEngine;
 
 public class KeyInputStub : KeyInput
 {
-	private readonly float _result;
+	private readonly Vector2 _result;
 
-	public KeyInputStub(float result)
+	public KeyInputStub(Vector2 result)
 	{
 		_result = result;
 	}
 
-	public override float GetHorizontalAxis()
+	// public override float GetHorizontalAxis()
+	// {
+	// 	return _result;
+	// }
+
+	// public override float GetVertictalAxis()
+	// {
+	// 	return _result;
+	// }
+
+	public override Vector2 GetNormalizedVector()
 	{
 		return _result;
 	}
+}
 
-	public override float GetVertictalAxis()
+public class RightHorizontalInputStub : KeyInputStub
+{
+	public RightHorizontalInputStub()
+		: base(new Vector2(1, 0))
 	{
-		return _result;
+		
+	}
+}
+
+public class LeftHorizontalInputStub : KeyInputStub
+{
+	public LeftHorizontalInputStub()
+		: base(new Vector2(-1, 0))
+	{
+		
+	}
+}
+
+public class NoMoveInputStub : KeyInputStub
+{
+	public NoMoveInputStub()
+		: base(Vector2.zero)
+	{
+		
 	}
 }

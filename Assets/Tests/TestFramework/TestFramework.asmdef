@@ -2,6 +2,7 @@
     "name": "TestFramework",
     "rootNamespace": "",
     "references": [
+        "GUID:9598beadb9fa64dada1ff99bf6d3d71e",
         "GUID:d0094f470c3b04cba87bb7f24b7d69e8"
     ],
     "includePlatforms": [],
