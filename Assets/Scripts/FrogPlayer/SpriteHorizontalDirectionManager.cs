@@ -5,7 +5,7 @@ namespace FrogSurvive.FrogPlayer
 {
 	public class SpriteHorizontalDirectionManager
 	{
-		public void FrogPlayerMoved(FrogPlayerMovedSignal frogPlayerMovedSignal)
+		public void OnFrogPlayerMoved(FrogPlayerMovedSignal frogPlayerMovedSignal)
 		{
 			if (DirectionChanged(frogPlayerMovedSignal.GameObject.transform.localScale.x, frogPlayerMovedSignal.Vector.x))
 				frogPlayerMovedSignal.GameObject.transform.localScale =  new Vector3(-frogPlayerMovedSignal.GameObject.transform.localScale.x,

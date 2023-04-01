@@ -15,7 +15,7 @@ public class SpriteHorizontalDirectionManagerTests
 		gameObject.transform.localScale = new Vector3(2, 2, 2);
 		var signal = new FrogPlayerMovedSignal(gameObject, Vector2.right);
 		//Act
-		Sut.FrogPlayerMoved(signal);
+		Sut.OnFrogPlayerMoved(signal);
 		//Assert
 		Assert.AreEqual(gameObject.transform.localScale, new Vector3(2, 2, 2));
 	}
@@ -28,7 +28,7 @@ public class SpriteHorizontalDirectionManagerTests
 		gameObject.transform.localScale = new Vector3(-2, 2, 2);
 		var signal = new FrogPlayerMovedSignal(gameObject, Vector2.left);
 		//Act
-		Sut.FrogPlayerMoved(signal);
+		Sut.OnFrogPlayerMoved(signal);
 		//Assert
 		Assert.AreEqual(gameObject.transform.localScale, new Vector3(-2, 2, 2));
 	}
@@ -41,7 +41,7 @@ public class SpriteHorizontalDirectionManagerTests
 		gameObject.transform.localScale = new Vector3(2, 2, 2);
 		var signal = new FrogPlayerMovedSignal(gameObject, Vector2.left);
 		//Act
-		Sut.FrogPlayerMoved(signal);
+		Sut.OnFrogPlayerMoved(signal);
 		//Assert
 		Assert.AreEqual(gameObject.transform.localScale, new Vector3(-2, 2, 2));
 	}
@@ -54,7 +54,7 @@ public class SpriteHorizontalDirectionManagerTests
 		gameObject.transform.localScale = new Vector3(-2, 2, 2);
 		var signal = new FrogPlayerMovedSignal(gameObject, Vector2.right);
 		//Act
-		Sut.FrogPlayerMoved(signal);
+		Sut.OnFrogPlayerMoved(signal);
 		//Assert
 		Assert.AreEqual(gameObject.transform.localScale, new Vector3(2, 2, 2));
 	}

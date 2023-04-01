@@ -4,15 +4,16 @@ using Zenject;
 namespace FrogSurvive.FrogPlayer
 {
 	[RequireComponent(typeof(Rigidbody2D))]
+	[RequireComponent(typeof(Animator))]
 	public class FrogPlayerBehaviour : MonoBehaviour
 	{
-		private HorizontalMover _horizontalMover;
+		private FrogPlayerMover _mover;
 		private Rigidbody2D _rigidBody;
 
 		[Inject]
-		public virtual void Construct(HorizontalMover horizontalMover)
+		public virtual void Construct(FrogPlayerMover mover)
 		{
-			_horizontalMover = horizontalMover;
+			_mover = mover;
 		}
 
 		void Start()
@@ -22,7 +23,7 @@ namespace FrogSurvive.FrogPlayer
 
 		void Update()
 		{
-			_horizontalMover.Move(_rigidBody);
+			_mover.Move(_rigidBody);
 		}
 	}
 }
