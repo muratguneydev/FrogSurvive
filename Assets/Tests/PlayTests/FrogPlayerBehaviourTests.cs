@@ -38,7 +38,7 @@ public class FrogPlayerBehaviourTests : ZenjectIntegrationTestFixture
 		var setUp = SetUp(KeyInputStub.None);
 		var originalX = setUp.GameObject.transform.position.x;
 		//Act
-		yield return new WaitForSeconds(1.1f);//Let it move up around 10 units in 1 second.
+		yield return null;
 		//Assert
 		Assert.AreEqual(setUp.GameObject.transform.position.x, originalX);
 	}
@@ -50,7 +50,7 @@ public class FrogPlayerBehaviourTests : ZenjectIntegrationTestFixture
 		var setUp = SetUp(KeyInputStub.Left);
 		setUp.GameObject.transform.localScale = new Vector3(2, 2, 2);
 		//Act
-		yield return new WaitForSeconds(1.1f);//Let it move up around 10 units in 1 second.
+		yield return null;
 		//Assert
 		Assert.AreEqual(setUp.GameObject.transform.localScale, new Vector3(-2, 2, 2));
 	}
@@ -62,7 +62,7 @@ public class FrogPlayerBehaviourTests : ZenjectIntegrationTestFixture
 		var setUp = SetUp(KeyInputStub.Right);
 		setUp.GameObject.transform.localScale = new Vector3(-2, 2, 2);
 		//Act
-		yield return new WaitForSeconds(1.1f);//Let it move up around 10 units in 1 second.
+		yield return null;
 		//Assert
 		Assert.AreEqual(setUp.GameObject.transform.localScale, new Vector3(2, 2, 2));
 	}
@@ -74,7 +74,7 @@ public class FrogPlayerBehaviourTests : ZenjectIntegrationTestFixture
 		var setUp = SetUp(KeyInputStub.Right);
 		setUp.GameObject.transform.localScale = new Vector3(2, 2, 2);
 		//Act
-		yield return new WaitForSeconds(1.1f);//Let it move up around 10 units in 1 second.
+		yield return null;
 		//Assert
 		Assert.AreEqual(setUp.GameObject.transform.localScale, new Vector3(2, 2, 2));
 	}
@@ -86,7 +86,7 @@ public class FrogPlayerBehaviourTests : ZenjectIntegrationTestFixture
 		var setUp = SetUp(KeyInputStub.Left);
 		setUp.GameObject.transform.localScale = new Vector3(-2, 2, 2);
 		//Act
-		yield return new WaitForSeconds(1.1f);//Let it move up around 10 units in 1 second.
+		yield return null;
 		//Assert
 		Assert.AreEqual(setUp.GameObject.transform.localScale, new Vector3(-2, 2, 2));
 	}

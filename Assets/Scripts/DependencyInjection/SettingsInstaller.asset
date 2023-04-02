@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FrogPlayerSettings:
     HorizontalVelocity: 10
+  Enemy1Settings:
+    VelocityInUnitsPerSecond: 10
+    SpawnPosition: {x: 7, y: 7, z: 0}
+    Enemy1Prefab: {fileID: 3918111251503604041, guid: 70f5c8468521d45f1a10f5632b8d597e, type: 3}

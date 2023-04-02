@@ -1,3 +1,5 @@
+using FrogSurvive.Controllers;
+using FrogSurvive.Enemy1;
 using FrogSurvive.FrogPlayer;
 using Scripts;
 using UnityEditor.Animations;
@@ -30,6 +32,11 @@ public class FrogPlayerTestSetUp
 	{
 		_container.Install<CoreInstaller>();
 		FrogPlayerInstaller.Install(_container, new FrogPlayerSettings(FrogHorizontalVelocityUnitsPerSecond));
+		//Enemy1Installer.Install(_container, new Enemy1Settings(FrogHorizontalVelocityUnitsPerSecond));
+
+		//REbind interfaces???
+		//_container.Rebind<GameController>().FromInstance(new GameControllerDummy());//For non-interface types, rebind cannot be AsSingle.
+
 		_container.Rebind<KeyInput>().FromInstance(_keyInput);//For non-interface types, rebind cannot be AsSingle.
 		_container.Bind<FrogPlayerBehaviour>().FromNewComponentOnNewGameObject()
 			.AsSingle();
@@ -42,4 +49,17 @@ public class FrogPlayerTestSetUp
 		var controller = UnityEditor.AssetDatabase.LoadAssetAtPath<AnimatorController>(AnimatorControllerAssetPath);
 		animator.runtimeAnimatorController = controller;
 	}
+
+	// private class GameControllerDummy : GameController
+	// {
+	// 	public GameControllerDummy() : base(null)
+	// 	{
+	// 	}
+
+	// 	public override void Initialize()
+	// 	{
+			
+	// 	}
+	// }
+
 }

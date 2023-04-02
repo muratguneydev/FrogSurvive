@@ -7,7 +7,9 @@
         "TestFramework",
         "Scripts",
         "FrogPlayer",
-        "Events"
+        "Events",
+        "Enemy1",
+        "Zenject"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

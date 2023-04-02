@@ -25,14 +25,6 @@ namespace FrogSurvive.FrogPlayer
 
 			rigidBody.velocity =  direction * _velocityMoveUnitsPerSecond;
 			_eventBus.Fire(new FrogPlayerMovedSignal(rigidBody.gameObject, direction));
-
-			//rigidBody.gameObject.GetComponent<Animator>().SetBool("isPlayerMovingVertically", true);
-
-			//Debug.Log(direction);
-			// var horizontalInput = _keyInput.GetHorizontalAxis();
-			// if (horizontalInput != 0)
-			// 	rigidBody.velocity = Vector2.right * _velocityMoveUnitsPerSecond;
-			//	//rigidBody.AddForce(new Vector2(horizontalInput * _velocityMoveUnitsPerSecond, 0));
 		}
 	}
 }

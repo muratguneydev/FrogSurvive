@@ -1,0 +1,40 @@
+using FrogSurvive.Enemy1;
+using UnityEngine;
+using Zenject;
+
+namespace FrogSurvive.Controllers
+{
+	public class GameController : IInitializable
+	{
+		private readonly Enemy1Spawner _enemy1Spawner;
+
+		//private readonly IEventBus _eventBus;
+
+		public GameController()//Enemy1Spawner enemy1Spawner)
+		{
+			//_enemy1Spawner = enemy1Spawner;
+			// = eventBus;
+		}
+
+		public virtual void Initialize()
+		{
+			//_enemy1Spawner.Invoke();
+		}
+
+		//Note: We are not directly raising domain events from UIEventHandler or handling those events there. We are raising UI events instead and subscribe to those here.
+		// public void OnResetButtonClicked(OnResetButtonClickedUISignal onResetButtonClickedUISignal)
+		// {
+		// 	//TODO: Do these in UIEventHandler as they are UI related?
+		// 	SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		// 	onResetButtonClickedUISignal.GameOverScreen.SetActive(false);
+		// 	//
+		// 	_eventBus.Fire(new GameResetSignal());
+		// }
+
+		// public void OnBirdHitThePipe(BirdHitThePipeUISignal birdHitThePipeSignal)
+		// {
+		// 	birdHitThePipeSignal.GameOverScreen.SetActive(true);
+		// 	_eventBus.Fire(new GameOverSignal());
+		// }
+	}
+}

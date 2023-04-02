@@ -21,16 +21,6 @@ public class KeyInputStub : KeyInput
 	public static KeyInput UpLeft => new KeyInputStub(Vector2.up + Vector2.left);
 	public static KeyInput DownLeft => new KeyInputStub(Vector2.down + Vector2.left);
 
-	// public override float GetHorizontalAxis()
-	// {
-	// 	return _result;
-	// }
-
-	// public override float GetVertictalAxis()
-	// {
-	// 	return _result;
-	// }
-
 	public override Vector2 GetNormalizedVector()
 	{
 		return _result;

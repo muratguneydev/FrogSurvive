@@ -9,7 +9,9 @@
         "FrogPlayer",
         "Scripts",
         "TestFramework",
-        "DependencyInjection"
+        "DependencyInjection",
+        "Enemy1",
+        "Controllers"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
