@@ -9,7 +9,7 @@ public class Enemy1SpawnerTests
 	public void Should_CreateNewObect_WhenSpawnInvoked()
 	{
 		var enemy1FactorySpy = new Enemy1FactorySpy();
-		var enemy1Settings = new Enemy1Settings(10, new Vector3(5, 10, 0));
+		var enemy1Settings = new Enemy1Settings(10, new Vector3(5, 10, 0), TestGameObject.GetNew());
 		var spawner = GetEnemy1Spawner(enemy1FactorySpy, enemy1Settings);
 		spawner.Invoke();
 
@@ -20,7 +20,7 @@ public class Enemy1SpawnerTests
 	public void Should_HaveCorrectInitialPosition_WhenSpawnInvoked()
 	{
 		var enemy1FactorySpy = new Enemy1FactorySpy();
-		var enemy1Settings = new Enemy1Settings(10, new Vector3(5, 10, 0));
+		var enemy1Settings = new Enemy1Settings(10, new Vector3(5, 10, 0), TestGameObject.GetNew());
 		var spawner = GetEnemy1Spawner(enemy1FactorySpy, enemy1Settings);
 		spawner.Invoke();
 
