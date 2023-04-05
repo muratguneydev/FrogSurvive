@@ -1,4 +1,3 @@
-using FrogSurvive.Controllers;
 using FrogSurvive.Enemy1;
 using FrogSurvive.FrogPlayer;
 using Scripts;
@@ -6,27 +5,36 @@ using UnityEditor.Animations;
 using UnityEngine;
 using Zenject;
 
-public class FrogPlayerTestSetUp
+public class TestDependencyInstaller
 {
 	const int FrogHorizontalVelocityUnitsPerSecond = 10;
 	private const string AnimatorControllerAssetPath = "Assets/Animations/PlayerHorizontalController.controller";
 	private readonly DiContainer _container;
 	private readonly KeyInput _keyInput;
+	private readonly Enemy1Settings _enemy1Settings;
 
-	public FrogPlayerTestSetUp(DiContainer container, KeyInput keyInput)
+	public TestDependencyInstaller(DiContainer container, KeyInput keyInput, Enemy1Settings enemy1Settings)
 	{
 		_container = container;
 		_keyInput = keyInput;
+		_enemy1Settings = enemy1Settings;
 	}
 
-	public void SetUp()
+	public TestDependencyInstaller(DiContainer container, KeyInput keyInput)
+	{
+		_container = container;
+		_keyInput = keyInput;
+		_enemy1Settings = GetDefaultEnemy1Settings();
+	}
+
+	public void Install()
 	{
 		RegisterDependencies();
 		SetAnimatorControllerToBeAbleToGetAndSetAnimatorParameters();
 	}
 
 	public FrogPlayerBehaviour FrogPlayerBehaviour => _container.Resolve<FrogPlayerBehaviour>();
-	public GameObject GameObject => FrogPlayerBehaviour.gameObject;
+	public GameObject FrogPlayerGameObject => FrogPlayerBehaviour.gameObject;
 
 	private void RegisterDependencies()
 	{
@@ -43,11 +51,9 @@ public class FrogPlayerTestSetUp
 	{
 		//TODO: For some reason we can't reference IInitializable here as commented out below, and use a dummy for GameController
 		//to avoid dependency to objects which are not really needed here.
-		var enemy1Prefab = TestGameObject.GetNew();
-		enemy1Prefab.AddComponent<Enemy1Behaviour>();
-		var enemy1Settings = new Enemy1Settings(default, Vector3.zero, enemy1Prefab);
-		_container.BindInstance(enemy1Settings);
-		Enemy1Installer.Install(_container, enemy1Settings);
+		
+		_container.BindInstance(_enemy1Settings);
+		Enemy1Installer.Install(_container, _enemy1Settings);
 
 		//REbind interfaces???
 		//_container.Rebind<GameController>().FromInstance(new GameControllerDummy());//For non-interface types, rebind cannot be AsSingle.
@@ -64,6 +70,14 @@ public class FrogPlayerTestSetUp
 
 		// 	}
 		// }
+	}
+
+	private static Enemy1Settings GetDefaultEnemy1Settings()
+	{
+		var enemy1Prefab = TestGameObject.GetNew();
+		enemy1Prefab.AddComponent<Enemy1Behaviour>();
+		var enemy1Settings = new Enemy1Settings(default, Vector3.zero, enemy1Prefab);
+		return enemy1Settings;
 	}
 
 	private void SetAnimatorControllerToBeAbleToGetAndSetAnimatorParameters()

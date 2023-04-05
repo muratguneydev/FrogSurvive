@@ -12,11 +12,11 @@ public class FrogPlayerBehaviourTests : ZenjectIntegrationTestFixture
 	{
 		//Arrange
 		var setUp = SetUp(KeyInputStub.Right);
-		var originalX = setUp.GameObject.transform.position.x;
+		var originalX = setUp.FrogPlayerGameObject.transform.position.x;
 		//Act
 		yield return new WaitForSeconds(1.1f);//Let it move up around 10 units in 1 second.
 		//Assert
-		Assert.IsTrue(setUp.GameObject.transform.position.x > originalX);
+		Assert.IsTrue(setUp.FrogPlayerGameObject.transform.position.x > originalX);
 	}
 
 	[UnityTest]
@@ -24,11 +24,11 @@ public class FrogPlayerBehaviourTests : ZenjectIntegrationTestFixture
 	{
 		//Arrange
 		var setUp = SetUp(KeyInputStub.Left);
-		var originalX = setUp.GameObject.transform.position.x;
+		var originalX = setUp.FrogPlayerGameObject.transform.position.x;
 		//Act
 		yield return new WaitForSeconds(1.1f);//Let it move up around 10 units in 1 second.
 		//Assert
-		Assert.IsTrue(setUp.GameObject.transform.position.x < originalX);
+		Assert.IsTrue(setUp.FrogPlayerGameObject.transform.position.x < originalX);
 	}
 
 	[UnityTest]
@@ -36,11 +36,11 @@ public class FrogPlayerBehaviourTests : ZenjectIntegrationTestFixture
 	{
 		//Arrange
 		var setUp = SetUp(KeyInputStub.None);
-		var originalX = setUp.GameObject.transform.position.x;
+		var originalX = setUp.FrogPlayerGameObject.transform.position.x;
 		//Act
 		yield return null;
 		//Assert
-		Assert.AreEqual(setUp.GameObject.transform.position.x, originalX);
+		Assert.AreEqual(setUp.FrogPlayerGameObject.transform.position.x, originalX);
 	}
 
 	[UnityTest]
@@ -48,11 +48,11 @@ public class FrogPlayerBehaviourTests : ZenjectIntegrationTestFixture
 	{
 		//Arrange
 		var setUp = SetUp(KeyInputStub.Left);
-		setUp.GameObject.transform.localScale = new Vector3(2, 2, 2);
+		setUp.FrogPlayerGameObject.transform.localScale = new Vector3(2, 2, 2);
 		//Act
 		yield return null;
 		//Assert
-		Assert.AreEqual(setUp.GameObject.transform.localScale, new Vector3(-2, 2, 2));
+		Assert.AreEqual(setUp.FrogPlayerGameObject.transform.localScale, new Vector3(-2, 2, 2));
 	}
 
 	[UnityTest]
@@ -60,11 +60,11 @@ public class FrogPlayerBehaviourTests : ZenjectIntegrationTestFixture
 	{
 		//Arrange
 		var setUp = SetUp(KeyInputStub.Right);
-		setUp.GameObject.transform.localScale = new Vector3(-2, 2, 2);
+		setUp.FrogPlayerGameObject.transform.localScale = new Vector3(-2, 2, 2);
 		//Act
 		yield return null;
 		//Assert
-		Assert.AreEqual(setUp.GameObject.transform.localScale, new Vector3(2, 2, 2));
+		Assert.AreEqual(setUp.FrogPlayerGameObject.transform.localScale, new Vector3(2, 2, 2));
 	}
 
 	[UnityTest]
@@ -72,11 +72,11 @@ public class FrogPlayerBehaviourTests : ZenjectIntegrationTestFixture
 	{
 		//Arrange
 		var setUp = SetUp(KeyInputStub.Right);
-		setUp.GameObject.transform.localScale = new Vector3(2, 2, 2);
+		setUp.FrogPlayerGameObject.transform.localScale = new Vector3(2, 2, 2);
 		//Act
 		yield return null;
 		//Assert
-		Assert.AreEqual(setUp.GameObject.transform.localScale, new Vector3(2, 2, 2));
+		Assert.AreEqual(setUp.FrogPlayerGameObject.transform.localScale, new Vector3(2, 2, 2));
 	}
 
 	[UnityTest]
@@ -84,18 +84,18 @@ public class FrogPlayerBehaviourTests : ZenjectIntegrationTestFixture
 	{
 		//Arrange
 		var setUp = SetUp(KeyInputStub.Left);
-		setUp.GameObject.transform.localScale = new Vector3(-2, 2, 2);
+		setUp.FrogPlayerGameObject.transform.localScale = new Vector3(-2, 2, 2);
 		//Act
 		yield return null;
 		//Assert
-		Assert.AreEqual(setUp.GameObject.transform.localScale, new Vector3(-2, 2, 2));
+		Assert.AreEqual(setUp.FrogPlayerGameObject.transform.localScale, new Vector3(-2, 2, 2));
 	}
 
-	private FrogPlayerTestSetUp SetUp(KeyInput keyInput)
+	private TestDependencyInstaller SetUp(KeyInput keyInput)
 	{
 		PreInstall();
-		var setUp = new FrogPlayerTestSetUp(Container, keyInput);
-		setUp.SetUp();
+		var setUp = new TestDependencyInstaller(Container, keyInput);
+		setUp.Install();
 		PostInstall();
 
 		return setUp;

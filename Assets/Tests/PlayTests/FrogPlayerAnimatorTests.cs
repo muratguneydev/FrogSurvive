@@ -15,7 +15,7 @@ public class FrogPlayerAnimatorTests : ZenjectIntegrationTestFixture
 		//Act
 		yield return null;
 		//Assert
-		Assert.IsTrue(setUp.GameObject.GetComponent<Animator>().GetBool("isPlayerMovingVertically"));
+		Assert.IsTrue(setUp.FrogPlayerGameObject.GetComponent<Animator>().GetBool("isPlayerMovingVertically"));
 	}
 
 	[UnityTest]
@@ -26,7 +26,7 @@ public class FrogPlayerAnimatorTests : ZenjectIntegrationTestFixture
 		//Act
 		yield return null;
 		//Assert
-		Assert.IsTrue(setUp.GameObject.GetComponent<Animator>().GetBool("isPlayerMovingVertically"));
+		Assert.IsTrue(setUp.FrogPlayerGameObject.GetComponent<Animator>().GetBool("isPlayerMovingVertically"));
 	}
 
 	[UnityTest]
@@ -37,7 +37,7 @@ public class FrogPlayerAnimatorTests : ZenjectIntegrationTestFixture
 		//Act
 		yield return null;
 		//Assert
-		Assert.IsTrue(setUp.GameObject.GetComponent<Animator>().GetBool("isPlayerMovingHorizontally"));
+		Assert.IsTrue(setUp.FrogPlayerGameObject.GetComponent<Animator>().GetBool("isPlayerMovingHorizontally"));
 	}
 
 	[UnityTest]
@@ -48,14 +48,14 @@ public class FrogPlayerAnimatorTests : ZenjectIntegrationTestFixture
 		//Act
 		yield return null;
 		//Assert
-		Assert.IsTrue(setUp.GameObject.GetComponent<Animator>().GetBool("isPlayerMovingHorizontally"));
+		Assert.IsTrue(setUp.FrogPlayerGameObject.GetComponent<Animator>().GetBool("isPlayerMovingHorizontally"));
 	}
 
-	private FrogPlayerTestSetUp SetUp(KeyInput keyInput)
+	private TestDependencyInstaller SetUp(KeyInput keyInput)
 	{
 		PreInstall();
-		var setUp = new FrogPlayerTestSetUp(Container, keyInput);
-		setUp.SetUp();
+		var setUp = new TestDependencyInstaller(Container, keyInput);
+		setUp.Install();
 		PostInstall();
 
 		return setUp;

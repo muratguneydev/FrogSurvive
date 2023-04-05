@@ -1,60 +1,30 @@
 using FrogSurvive.Enemy1;
 using NUnit.Framework;
+using Scripts;
 using UnityEngine;
-using Zenject;
 
 public class Enemy1SpawnerTests
 {
+	private static Velocity Velocity = new Velocity(10, Vector2.down);
+	private static Enemy1Settings Enemy1Settings = new Enemy1Settings(Velocity, new Vector3(5, 10, 0), TestGameObject.GetNew());
+	private static FactorySpy<Enemy1Behaviour> Enemy1FactorySpy = new FactorySpy<Enemy1Behaviour>();
+	private static Enemy1Spawner Spawner = new Enemy1Spawner(Enemy1FactorySpy, Enemy1Settings);
+
 	[Test]
 	public void Should_CreateNewObect_WhenSpawnInvoked()
 	{
-		var enemy1FactorySpy = new Enemy1FactorySpy();
-		var enemy1Settings = new Enemy1Settings(10, new Vector3(5, 10, 0), TestGameObject.GetNew());
-		var spawner = GetEnemy1Spawner(enemy1FactorySpy, enemy1Settings);
-		spawner.Invoke();
-
-		Assert.IsTrue(enemy1FactorySpy.IsCreateInvoked);
+		//Act
+		Spawner.Spawn();
+		//Assert
+		Assert.IsTrue(Enemy1FactorySpy.IsCreateInvoked);
 	}
 
 	[Test]
 	public void Should_HaveCorrectInitialPosition_WhenSpawnInvoked()
 	{
-		var enemy1FactorySpy = new Enemy1FactorySpy();
-		var enemy1Settings = new Enemy1Settings(10, new Vector3(5, 10, 0), TestGameObject.GetNew());
-		var spawner = GetEnemy1Spawner(enemy1FactorySpy, enemy1Settings);
-		spawner.Invoke();
-
-		Assert.IsTrue(enemy1FactorySpy.CreatedObject.transform.position == enemy1Settings.SpawnPosition);
+		//Act
+		Spawner.Spawn();
+		//Assert
+		Assert.AreEqual(Enemy1Settings.SpawnPosition, Enemy1FactorySpy.CreatedObject.transform.position);
 	}
-
-	private static Enemy1Spawner GetEnemy1Spawner(IFactory<Enemy1Behaviour> enemy1Factory, Enemy1Settings enemy1Settings)
-	{
-		return new Enemy1Spawner(enemy1Factory, enemy1Settings);
-	}
-
-	// private class SpawnedTestEnemy1
-	// {
-	// 	public SpawnedTestEnemy1(float expectedYPosition)
-	// 	{
-	// 		ExpectedYPosition = expectedYPosition;
-
-	// 		//var gameObject = new GameObject();
-	// 		Pipe = TestGameObject.GetNew().AddComponent<TestPipe>();
-	// 	}
-
-	// 	public float ExpectedYPosition { get; }
-	// 	public TestPipe Pipe { get; }
-
-	// 	public void AssertYPosition()
-	// 	{
-	// 		Assert.AreEqual(ExpectedYPosition, Pipe.transform.position.y);
-	// 	}
-	// }
-
-	// public class TestPipe : PipeBehaviour
-	// {
-
-	// }
-
-	
 }

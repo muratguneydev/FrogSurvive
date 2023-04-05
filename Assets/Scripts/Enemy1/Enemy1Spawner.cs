@@ -1,9 +1,8 @@
-using Scripts;
 using Zenject;
 
 namespace FrogSurvive.Enemy1
 {
-	public class Enemy1Spawner : IInvokable
+	public class Enemy1Spawner
 	{
 		private readonly IFactory<Enemy1Behaviour> _enemy1Factory;
 		private readonly Enemy1Settings _enemy1Settings;
@@ -14,7 +13,7 @@ namespace FrogSurvive.Enemy1
 			_enemy1Settings = enemy1Settings;
 		}
 
-		public void Invoke()
+		public virtual void Spawn()
 		{
 			var enemy1Behaviour = _enemy1Factory.Create();
 			enemy1Behaviour.transform.position = _enemy1Settings.SpawnPosition;

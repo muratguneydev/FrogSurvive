@@ -3,6 +3,7 @@ using Zenject;
 
 public class Enemy1Installer : Installer<Enemy1Settings, Enemy1Installer>
 {
+	public const string Enemy1GameObjectName = "Enemy1";
 	private readonly Enemy1Settings _enemy1Settings;
 
 	public Enemy1Installer(Enemy1Settings enemy1Settings)
@@ -20,7 +21,7 @@ public class Enemy1Installer : Installer<Enemy1Settings, Enemy1Installer>
 				// this prefab and then search it for the Xxx component
 				.FromComponentInNewPrefab(_enemy1Settings.Enemy1Prefab)
 				// We can also tell Zenject what to name the new gameobject here
-				.WithGameObjectName("Enemy1")
+				.WithGameObjectName(Enemy1GameObjectName)
 				// GameObjectGroup's are just game objects used for organization
 				// This is nice so that it doesn't clutter up our scene hierarchy
 				.UnderTransformGroup("Enemy1s");

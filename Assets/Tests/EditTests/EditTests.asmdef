@@ -9,7 +9,8 @@
         "FrogPlayer",
         "Events",
         "Enemy1",
-        "Zenject"
+        "Zenject",
+        "Controllers"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

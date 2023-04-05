@@ -18,7 +18,8 @@ namespace FrogSurvive.Controllers
 
 		public virtual void Initialize()
 		{
-			_enemy1Spawner.Invoke();
+			//Debug.Log("Spawned");
+			_enemy1Spawner.Spawn();
 		}
 
 		//Note: We are not directly raising domain events from UIEventHandler or handling those events there. We are raising UI events instead and subscribe to those here.
