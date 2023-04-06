@@ -14,7 +14,6 @@ namespace FrogSurvive.Enemy1
 			Enemy1Prefab = enemy1Prefab;
 		}
 
-		public float VelocityInUnitsPerSecond = 10;
 		public Vector3 SpawnPosition;
 		public GameObject Enemy1Prefab;
 		public Velocity Velocity;

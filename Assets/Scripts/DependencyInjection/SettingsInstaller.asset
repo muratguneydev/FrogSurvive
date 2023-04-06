@@ -19,5 +19,5 @@ MonoBehaviour:
     SpawnPosition: {x: 7, y: 7, z: 0}
     Enemy1Prefab: {fileID: 3918111251503604041, guid: 70f5c8468521d45f1a10f5632b8d597e, type: 3}
     Velocity:
-      SpeedInUnitsPerSecond: 10
+      SpeedInUnitsPerSecond: 2
       Direction: {x: 0, y: -1}

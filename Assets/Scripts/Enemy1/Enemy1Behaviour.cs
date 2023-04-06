@@ -4,29 +4,25 @@ using Zenject;
 
 namespace FrogSurvive.Enemy1
 {
+	[RequireComponent(typeof(Rigidbody2D))]
 	public class Enemy1Behaviour : MonoBehaviour
 	{
-		//[SerializeField] private float moveSpeed;
-		//private LeftMover _leftMover;
 		private IEventBus _eventBus;
+		private Enemy1Settings _enemy1Settings;
 
 		[Inject]
-        public void Construct(IEventBus eventBus)//, LeftMover leftMover)
+        public void Construct(IEventBus eventBus, Enemy1Settings enemy1Settings)
         {
             _eventBus = eventBus;
-			//_leftMover = leftMover;
+			_enemy1Settings = enemy1Settings;
         }
 
-		// void Update()
-		// {
-		// 	MoveLeft();
-		// }
-
-		// private void MoveLeft()
-		// {
-		// 	transform.position = _leftMover.Move(transform.position, Time.deltaTime);
-		// 	_eventBus.Fire(new ObjectMovedSignal(gameObject));
-		// }
+		void Start()
+		{
+			Debug.Log(GetComponent<Rigidbody2D>());
+			Debug.Log(_enemy1Settings);
+			GetComponent<Rigidbody2D>().velocity = _enemy1Settings.Velocity.Value;
+		}
 
 		public class Factory : PlaceholderFactory<Enemy1Behaviour>, IFactory<Enemy1Behaviour>
         {

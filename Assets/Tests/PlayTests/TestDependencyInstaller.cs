@@ -21,10 +21,9 @@ public class TestDependencyInstaller
 	}
 
 	public TestDependencyInstaller(DiContainer container, KeyInput keyInput)
+		: this(container, keyInput, new Enemy1Settings(new Velocity(10, Vector2.down), Vector3.zero, PrefabFactory.Enemy1))
 	{
-		_container = container;
-		_keyInput = keyInput;
-		_enemy1Settings = GetDefaultEnemy1Settings();
+		
 	}
 
 	public void Install()
@@ -35,6 +34,12 @@ public class TestDependencyInstaller
 
 	public FrogPlayerBehaviour FrogPlayerBehaviour => _container.Resolve<FrogPlayerBehaviour>();
 	public GameObject FrogPlayerGameObject => FrogPlayerBehaviour.gameObject;
+
+	// public GameObject GetEnemy1()
+	// 	=> _container.Resolve<Enemy1Spawner>().Spawn();
+	// public Enemy1Behaviour Enemy1Behaviour => _container.Resolve<Enemy1Behaviour>();
+	// public GameObject Enemy1GameObject => Enemy1Behaviour.gameObject;
+
 
 	private void RegisterDependencies()
 	{
@@ -53,7 +58,10 @@ public class TestDependencyInstaller
 		//to avoid dependency to objects which are not really needed here.
 		
 		_container.BindInstance(_enemy1Settings);
+		//Debug.Log($"Registering:{_enemy1Settings}");
 		Enemy1Installer.Install(_container, _enemy1Settings);
+		_container.Bind<Enemy1Behaviour>()//..FromNewComponentOnNewGameObject()
+		 	.AsSingle();
 
 		//REbind interfaces???
 		//_container.Rebind<GameController>().FromInstance(new GameControllerDummy());//For non-interface types, rebind cannot be AsSingle.
@@ -72,13 +80,13 @@ public class TestDependencyInstaller
 		// }
 	}
 
-	private static Enemy1Settings GetDefaultEnemy1Settings()
-	{
-		var enemy1Prefab = TestGameObject.GetNew();
-		enemy1Prefab.AddComponent<Enemy1Behaviour>();
-		var enemy1Settings = new Enemy1Settings(default, Vector3.zero, enemy1Prefab);
-		return enemy1Settings;
-	}
+	// private static Enemy1Settings GetDefaultEnemy1Settings()
+	// {
+	// 	var enemy1Prefab = TestGameObject.GetNew();
+	// 	enemy1Prefab.AddComponent<Enemy1Behaviour>();
+	// 	var enemy1Settings = new Enemy1Settings(default, Vector3.zero, enemy1Prefab);
+	// 	return enemy1Settings;
+	// }
 
 	private void SetAnimatorControllerToBeAbleToGetAndSetAnimatorParameters()
 	{
