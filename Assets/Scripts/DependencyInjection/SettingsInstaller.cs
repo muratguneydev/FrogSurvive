@@ -8,10 +8,12 @@ public class SettingsInstaller : ScriptableObjectInstaller<SettingsInstaller>
 {
 	public FrogPlayerSettings FrogPlayerSettings;
 	public Enemy1Settings Enemy1Settings;
+	public Enemy1BulletSettings Enemy1BulletSettings;
 	
     public override void InstallBindings()
     {
 		Container.BindInstance(FrogPlayerSettings);
 		Container.BindInstance(Enemy1Settings);
+		Container.BindInstance(Enemy1BulletSettings);
     }
 }

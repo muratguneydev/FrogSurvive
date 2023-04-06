@@ -12,16 +12,20 @@ public class TestDependencyInstaller
 	private readonly DiContainer _container;
 	private readonly KeyInput _keyInput;
 	private readonly Enemy1Settings _enemy1Settings;
+	private readonly Enemy1BulletSettings _enemy1BulletSettings;
 
-	public TestDependencyInstaller(DiContainer container, KeyInput keyInput, Enemy1Settings enemy1Settings)
+	public TestDependencyInstaller(DiContainer container, KeyInput keyInput, Enemy1Settings enemy1Settings, Enemy1BulletSettings enemy1BulletSettings)
 	{
 		_container = container;
 		_keyInput = keyInput;
 		_enemy1Settings = enemy1Settings;
+		_enemy1BulletSettings = enemy1BulletSettings;
 	}
 
 	public TestDependencyInstaller(DiContainer container, KeyInput keyInput)
-		: this(container, keyInput, new Enemy1Settings(new Velocity(10, Vector2.down), Vector3.zero, PrefabFactory.Enemy1))
+		: this(container, keyInput,
+				new Enemy1Settings(new Velocity(10, Vector2.down), Vector3.zero, PrefabFactory.Enemy1),
+				new Enemy1BulletSettings(new Velocity(10, Vector2.down), Vector3.zero, PrefabFactory.Enemy1Bullet))
 	{
 		
 	}
@@ -34,12 +38,6 @@ public class TestDependencyInstaller
 
 	public FrogPlayerBehaviour FrogPlayerBehaviour => _container.Resolve<FrogPlayerBehaviour>();
 	public GameObject FrogPlayerGameObject => FrogPlayerBehaviour.gameObject;
-
-	// public GameObject GetEnemy1()
-	// 	=> _container.Resolve<Enemy1Spawner>().Spawn();
-	// public Enemy1Behaviour Enemy1Behaviour => _container.Resolve<Enemy1Behaviour>();
-	// public GameObject Enemy1GameObject => Enemy1Behaviour.gameObject;
-
 
 	private void RegisterDependencies()
 	{
@@ -58,35 +56,14 @@ public class TestDependencyInstaller
 		//to avoid dependency to objects which are not really needed here.
 		
 		_container.BindInstance(_enemy1Settings);
-		//Debug.Log($"Registering:{_enemy1Settings}");
-		Enemy1Installer.Install(_container, _enemy1Settings);
-		_container.Bind<Enemy1Behaviour>()//..FromNewComponentOnNewGameObject()
-		 	.AsSingle();
+		_container.BindInstance(_enemy1BulletSettings);
+		Enemy1Installer.Install(_container, _enemy1Settings, _enemy1BulletSettings);
+		_container.Bind<Enemy1Behaviour>().AsSingle();
+		_container.Bind<Enemy1BulletBehaviour>().AsSingle();
 
 		//REbind interfaces???
-		//_container.Rebind<GameController>().FromInstance(new GameControllerDummy());//For non-interface types, rebind cannot be AsSingle.
 		//_container.Rebind<IInitializable>().FromInstance(new GameControllerDummy());
-
-		// 	private class GameControllerDummy : GameController
-		// {
-		// 	public GameControllerDummy() : base(null)
-		// 	{
-		// 	}
-
-		// 	public override void Initialize()
-		// 	{
-
-		// 	}
-		// }
 	}
-
-	// private static Enemy1Settings GetDefaultEnemy1Settings()
-	// {
-	// 	var enemy1Prefab = TestGameObject.GetNew();
-	// 	enemy1Prefab.AddComponent<Enemy1Behaviour>();
-	// 	var enemy1Settings = new Enemy1Settings(default, Vector3.zero, enemy1Prefab);
-	// 	return enemy1Settings;
-	// }
 
 	private void SetAnimatorControllerToBeAbleToGetAndSetAnimatorParameters()
 	{

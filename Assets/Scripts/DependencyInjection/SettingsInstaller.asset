@@ -15,9 +15,14 @@ MonoBehaviour:
   FrogPlayerSettings:
     HorizontalVelocity: 10
   Enemy1Settings:
-    VelocityInUnitsPerSecond: 10
     SpawnPosition: {x: 7, y: 7, z: 0}
     Enemy1Prefab: {fileID: 3918111251503604041, guid: 70f5c8468521d45f1a10f5632b8d597e, type: 3}
     Velocity:
       SpeedInUnitsPerSecond: 2
+      Direction: {x: 0, y: -1}
+  Enemy1BulletSettings:
+    SpawnPosition: {x: 7, y: 9, z: 0}
+    Enemy1BulletPrefab: {fileID: 3643228146071392572, guid: 8d8fe4fe62d3a432eb71f170aae926bc, type: 3}
+    Velocity:
+      SpeedInUnitsPerSecond: 3
       Direction: {x: 0, y: -1}

@@ -1,5 +1,4 @@
 using FrogSurvive.Enemy1;
-using UnityEngine;
 
 public class Enemy1SpawnerSpy : Enemy1Spawner
 {
@@ -14,13 +13,4 @@ public class Enemy1SpawnerSpy : Enemy1Spawner
 	}
 
 	public bool IsSpawned { get; private set; }
-}
-
-public class Enemy1SettingsDummy : Enemy1Settings
-{
-	public Enemy1SettingsDummy()
-		: base(default, Vector3.zero, TestGameObject.GetNew())
-	{
-		
-	}
 }

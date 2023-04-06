@@ -19,8 +19,6 @@ namespace FrogSurvive.Enemy1
 
 		void Start()
 		{
-			Debug.Log(GetComponent<Rigidbody2D>());
-			Debug.Log(_enemy1Settings);
 			GetComponent<Rigidbody2D>().velocity = _enemy1Settings.Velocity.Value;
 		}
 

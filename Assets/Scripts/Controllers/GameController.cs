@@ -7,12 +7,14 @@ namespace FrogSurvive.Controllers
 	public class GameController : IInitializable
 	{
 		private readonly Enemy1Spawner _enemy1Spawner;
+		private readonly Enemy1BulletSpawner _enemy1BulletSpawner;
 
 		//private readonly IEventBus _eventBus;
 
-		public GameController(Enemy1Spawner enemy1Spawner)
+		public GameController(Enemy1Spawner enemy1Spawner, Enemy1BulletSpawner enemy1BulletSpawner)
 		{
 			_enemy1Spawner = enemy1Spawner;
+			_enemy1BulletSpawner = enemy1BulletSpawner;
 			// = eventBus;
 		}
 
@@ -20,6 +22,7 @@ namespace FrogSurvive.Controllers
 		{
 			//Debug.Log("Spawned");
 			_enemy1Spawner.Spawn();
+			_enemy1BulletSpawner.Spawn();
 		}
 
 		//Note: We are not directly raising domain events from UIEventHandler or handling those events there. We are raising UI events instead and subscribe to those here.
