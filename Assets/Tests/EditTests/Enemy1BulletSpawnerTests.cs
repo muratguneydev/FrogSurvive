@@ -15,7 +15,7 @@ public class Enemy1BulletSpawnerTests
 	{
 		//Act
 		Spawner.Spawn();
-		//Assert
+		//Assert 
 		Assert.IsTrue(Enemy1BulletFactorySpy.IsCreateInvoked);
 	}
 
