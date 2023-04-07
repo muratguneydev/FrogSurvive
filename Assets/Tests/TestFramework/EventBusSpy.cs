@@ -41,11 +41,15 @@ public class EventBusSpy<T> : IEventBus where T : class
 	}
 }
 
-public class EventBusDummy : IEventBus
+public class EventBusSpy : IEventBus
 {
+	private List<object> _firedEvents = new();
+	private List<Action<object>> _subscriptions = new();
+
 	public void Fire<TEvent>(TEvent @event)
 	{
-		
+		Debug.Log($"Spy Event Bus fired event:{@event}");
+		_firedEvents.Add(@event);
 	}
 
 	public void Subscribe<TEvent>(Action<TEvent> callback)
@@ -56,5 +60,10 @@ public class EventBusDummy : IEventBus
 	public void Unsubscribe<TEvent>(Action<TEvent> callback)
 	{
 		
+	}
+
+	public (bool, T) IsExpectedEventFired<T>() where T: class
+	{
+		return new (_firedEvents.Any(firedEvent => firedEvent is T), _firedEvents.FirstOrDefault(firedEvent => firedEvent is T) as T);
 	}
 }

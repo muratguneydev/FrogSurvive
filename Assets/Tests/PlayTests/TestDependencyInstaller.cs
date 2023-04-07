@@ -1,4 +1,5 @@
 using FrogSurvive.Enemy1;
+using FrogSurvive.Events;
 using FrogSurvive.FrogPlayer;
 using Scripts;
 using UnityEditor.Animations;
@@ -25,7 +26,7 @@ public class TestDependencyInstaller
 	public TestDependencyInstaller(DiContainer container, KeyInput keyInput)
 		: this(container, keyInput,
 				new Enemy1Settings(new Velocity(10, Vector2.down), Vector3.zero, PrefabFactory.Enemy1),
-				new Enemy1BulletSettings(new Velocity(10, Vector2.down), Vector3.zero, PrefabFactory.Enemy1Bullet))
+				new Enemy1BulletSettings(new Velocity(10, Vector2.down), PrefabFactory.Enemy1Bullet))
 	{
 		
 	}
@@ -38,6 +39,7 @@ public class TestDependencyInstaller
 
 	public FrogPlayerBehaviour FrogPlayerBehaviour => _container.Resolve<FrogPlayerBehaviour>();
 	public GameObject FrogPlayerGameObject => FrogPlayerBehaviour.gameObject;
+	public IEventBus EventBus => _container.Resolve<IEventBus>();
 
 	private void RegisterDependencies()
 	{

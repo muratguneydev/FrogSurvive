@@ -4,18 +4,13 @@ namespace FrogSurvive.Events
 {
 	public class FrogPlayerMovedSignal
 	{
-		public FrogPlayerMovedSignal(GameObject gameObject, Vector2 vector)
+		public FrogPlayerMovedSignal(GameObject frogPlayer, Vector2 vector)
 		{
-			GameObject = gameObject;
+			FrogPlayer = frogPlayer;
 			Vector = vector;
 		}
 
-		public GameObject GameObject { get; }
+		public GameObject FrogPlayer { get; }
 		public Vector2 Vector { get; }
 	}
-
-	// public class FrogPlayerMovedRightSignal
-	// {
-
-	// }
 }

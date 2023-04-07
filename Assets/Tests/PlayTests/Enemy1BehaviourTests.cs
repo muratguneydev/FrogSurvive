@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using FrogSurvive.Enemy1;
+using FrogSurvive.Events;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -7,7 +9,9 @@ using Zenject;
 
 public class Enemy1BehaviourTests : ZenjectIntegrationTestFixture
 {
-    [UnityTest]
+	private bool _isEnemy1MovedEventRaised;
+
+	[UnityTest]
 	public IEnumerator Should_MoveDown_WhenCreated()
 	{
 		//Arrange
@@ -18,6 +22,23 @@ public class Enemy1BehaviourTests : ZenjectIntegrationTestFixture
 		yield return new WaitForSeconds(1.0f);//Let it move down around 10 units in 1 second.
 		//Assert
 		Assert.IsTrue(enemy1GameObject.transform.position.y < originalY);
+	}
+
+	[UnityTest]
+	public IEnumerator Should_RaiseEvent_WhenMoved()
+	{
+		//Arrange
+		var setUp = SetUp();
+		setUp.EventBus.Subscribe<Enemy1MovedSignal>(OnEnemy1Moved);
+		//Act
+		yield return new WaitForFixedUpdate();//Let it move down
+		//Assert
+		Assert.IsTrue(_isEnemy1MovedEventRaised);
+	}
+
+	private void OnEnemy1Moved(Enemy1MovedSignal enemy1MovedSignal)
+	{
+		_isEnemy1MovedEventRaised = true;
 	}
 
 	private TestDependencyInstaller SetUp()

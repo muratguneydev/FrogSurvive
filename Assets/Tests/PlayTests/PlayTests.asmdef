@@ -11,7 +11,8 @@
         "TestFramework",
         "DependencyInjection",
         "Enemy1",
-        "Controllers"
+        "Controllers",
+        "Events"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

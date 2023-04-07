@@ -22,6 +22,11 @@ namespace FrogSurvive.Enemy1
 			GetComponent<Rigidbody2D>().velocity = _enemy1Settings.Velocity.Value;
 		}
 
+		void FixedUpdate()
+		{
+			_eventBus.Fire(new Enemy1MovedSignal(gameObject));
+		}
+
 		public class Factory : PlaceholderFactory<Enemy1Behaviour>, IFactory<Enemy1Behaviour>
         {
         }
