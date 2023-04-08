@@ -75,3 +75,5 @@ crashlytics-build.properties
 InitTestScene*.unity.meta
 InitTestScene*.unity
 mono_crash.mem.*.*.blob
+Assets/Tests/.DS_Store
+Assets/.DS_Store

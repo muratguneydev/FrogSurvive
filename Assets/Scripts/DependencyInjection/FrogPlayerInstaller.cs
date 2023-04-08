@@ -1,3 +1,4 @@
+using FrogSurvive.Enemy1;
 using FrogSurvive.Events;
 using FrogSurvive.FrogPlayer;
 using Zenject;
@@ -21,6 +22,9 @@ public class FrogPlayerInstaller : Installer<FrogPlayerSettings, FrogPlayerInsta
 			.FromResolve();
 		Container.BindSignal<FrogPlayerMovedSignal>()
             .ToMethod<FrogPlayerAnimatorManager>(x => x.OnFrogPlayerMoved)
+			.FromResolve();
+		Container.BindSignal<FrogPlayerMovedSignal>()
+            .ToMethod<Enemy1BulletSpawner>(x => x.OnFrogPlayerMoved)
 			.FromResolve();
 
 		Container.Bind<SpriteHorizontalDirectionManager>().AsSingle();

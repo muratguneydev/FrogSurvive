@@ -26,7 +26,7 @@ public class TestDependencyInstaller
 	public TestDependencyInstaller(DiContainer container, KeyInput keyInput)
 		: this(container, keyInput,
 				new Enemy1Settings(new Velocity(10, Vector2.down), Vector3.zero, PrefabFactory.Enemy1),
-				new Enemy1BulletSettings(new Velocity(10, Vector2.down), PrefabFactory.Enemy1Bullet))
+				new Enemy1BulletSettings(10f, PrefabFactory.Enemy1Bullet))
 	{
 		
 	}

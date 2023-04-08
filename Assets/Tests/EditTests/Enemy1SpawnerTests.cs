@@ -38,14 +38,5 @@ public class Enemy1SpawnerTests
 		//Assert
 		var (isFired, _) = EventBusSpy.IsExpectedEventFired();
 		Assert.IsTrue(isFired);
-
-		/*
-		var eventBusSpy = new EventBusSpy<Enemy1SpawnedSignal>();
-		var horizontalMover = FrogPlayerMoverTestHelper.GetMover(eventBusSpy, KeyInputStub.Right);
-		//Act
-		horizontalMover.Move(TestRigidBody.GetNew());
-		//Assert
-		var (isEventFired, firedEvent) = eventBusSpy.IsExpectedEventFired();
-		*/
 	}
 }

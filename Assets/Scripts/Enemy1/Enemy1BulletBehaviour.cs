@@ -17,10 +17,10 @@ namespace FrogSurvive.Enemy1
 			_enemy1BulletSettings = enemy1BulletSettings;
         }
 
-		void Start()
-		{
-			GetComponent<Rigidbody2D>().velocity = _enemy1BulletSettings.Velocity.Value;
-		}
+		// void Start()
+		// {
+		// 	GetComponent<Rigidbody2D>().velocity = _enemy1BulletSettings.Velocity.Value;
+		// }
 
 		public class Factory : PlaceholderFactory<Enemy1BulletBehaviour>, IFactory<Enemy1BulletBehaviour>
         {

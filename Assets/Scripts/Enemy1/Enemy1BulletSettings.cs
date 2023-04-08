@@ -1,5 +1,4 @@
 using System;
-using Scripts;
 using UnityEngine;
 
 namespace FrogSurvive.Enemy1
@@ -7,15 +6,13 @@ namespace FrogSurvive.Enemy1
 	[Serializable]
 	public class Enemy1BulletSettings
 	{
-		public Enemy1BulletSettings(Velocity velocity, GameObject enemy1BulletPrefab)
+		public Enemy1BulletSettings(float speedInUnitsPerSecond, GameObject enemy1BulletPrefab)
 		{
-			Velocity = velocity;
-			//SpawnPosition = spawnPosition;
+			SpeedInUnitsPerSecond = speedInUnitsPerSecond;
 			Enemy1BulletPrefab = enemy1BulletPrefab;
 		}
 
-		//public Vector3 SpawnPosition;
 		public GameObject Enemy1BulletPrefab;
-		public Velocity Velocity;
+		public float SpeedInUnitsPerSecond;
 	}
 }

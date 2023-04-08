@@ -20,8 +20,8 @@ namespace FrogSurvive.FrogPlayer
 		public virtual void Move(Rigidbody2D rigidBody)
 		{
 			var direction = _keyInput.GetNormalizedVector();
-			// if (direction == Vector2.zero)
-			//  	return;
+			if (direction == Vector2.zero)
+			 	return;
 
 			rigidBody.velocity =  direction * _velocityMoveUnitsPerSecond;
 			_eventBus.Fire(new FrogPlayerMovedSignal(rigidBody.gameObject, direction));
