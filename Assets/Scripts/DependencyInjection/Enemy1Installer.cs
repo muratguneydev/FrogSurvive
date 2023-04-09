@@ -34,15 +34,15 @@ public class Enemy1Installer : Installer<Enemy1Settings, Enemy1BulletSettings, E
 				.WithGameObjectName(Enemy1BulletGameObjectName)
 				.UnderTransformGroup("Enemy1s");
 		
-		Container.DeclareSignal<Enemy1MovedSignal>();
-		Container.BindSignal<Enemy1MovedSignal>()
-            .ToMethod<Enemy1BulletSpawner>(x => x.OnEnemy1Moved)
-			.FromResolve();
+		//Container.DeclareSignal<Enemy1MovedSignal>();
+		// Container.BindSignal<Enemy1MovedSignal>()
+        //     .ToMethod<Enemy1BulletSpawner>(x => x.OnEnemy1Moved)
+		// 	.FromResolve();
 
-		Container.DeclareSignal<Enemy1SpawnedSignal>();
-		Container.BindSignal<Enemy1SpawnedSignal>()
-            .ToMethod<Enemy1BulletSpawner>(x => x.OnEnemy1Spawned)
-			.FromResolve();
+		//Container.DeclareSignal<Enemy1SpawnedSignal>();
+		// Container.BindSignal<Enemy1SpawnedSignal>()
+        //     .ToMethod<Enemy1BulletSpawner>(x => x.OnEnemy1Spawned)
+		// 	.FromResolve();
 		
 	}
 }

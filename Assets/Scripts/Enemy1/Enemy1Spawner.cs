@@ -21,7 +21,7 @@ namespace FrogSurvive.Enemy1
 			var enemy1Behaviour = _enemy1Factory.Create();
 			enemy1Behaviour.transform.position = _enemy1Settings.SpawnPosition;
 
-			_eventBus.Fire(new Enemy1SpawnedSignal(enemy1Behaviour.gameObject));
+			//_eventBus.Fire(new Enemy1SpawnedSignal(enemy1Behaviour.gameObject));
 		}
 	}
 }

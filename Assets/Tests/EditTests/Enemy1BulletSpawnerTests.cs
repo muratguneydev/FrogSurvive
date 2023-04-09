@@ -15,7 +15,7 @@ public class Enemy1BulletSpawnerTests
 	public void Should_CreateNewObect_WhenSpawned()
 	{
 		//Act
-		Spawner.Spawn();
+		Spawner.Spawn(Vector3.zero);
 		//Assert 
 		Assert.IsTrue(Enemy1BulletFactorySpy.IsCreateInvoked);
 	}
@@ -28,15 +28,12 @@ public class Enemy1BulletSpawnerTests
 		float enemy1X, float enemy1Y, float expectedBulletX, float expectedBulletY)
 	{
 		//Arrange
-		var enemy1 = TestGameObject.GetNew();
-		enemy1.transform.position = new Vector3(enemy1X, enemy1Y, 0);
-		Spawner.OnEnemy1Moved(new Enemy1MovedSignal(enemy1));
-
 		var frogPlayer = TestGameObject.GetNew();
 		frogPlayer.transform.position = FrogPlayerPosition;
 		Spawner.OnFrogPlayerMoved(new FrogPlayerMovedSignal(frogPlayer, default));
 		//Act
-		Spawner.Spawn();
+		var enemy1Position = new Vector3(enemy1X, enemy1Y, 0);
+		Spawner.Spawn(enemy1Position);
 		//Assert
 		Assert.AreEqual(new Vector3(expectedBulletX, expectedBulletY, 0), Enemy1BulletFactorySpy.CreatedObject.transform.position);
 	}
@@ -49,15 +46,12 @@ public class Enemy1BulletSpawnerTests
 		float enemy1X, float enemy1Y, float expectedBulletX, float expectedBulletY)
 	{
 		//Arrange
-		var enemy1 = TestGameObject.GetNew();
-		enemy1.transform.position = new Vector3(enemy1X, enemy1Y, 0);
-		Spawner.OnEnemy1Spawned(new Enemy1SpawnedSignal(enemy1));
-
 		var frogPlayer = TestGameObject.GetNew();
 		frogPlayer.transform.position = FrogPlayerPosition;
 		Spawner.OnFrogPlayerMoved(new FrogPlayerMovedSignal(frogPlayer, default));
 		//Act
-		Spawner.Spawn();
+		var enemy1Position = new Vector3(enemy1X, enemy1Y, 0);
+		Spawner.Spawn(enemy1Position);
 		//Assert
 		Assert.AreEqual(new Vector3(expectedBulletX, expectedBulletY, 0), Enemy1BulletFactorySpy.CreatedObject.transform.position);
 	}
@@ -68,15 +62,11 @@ public class Enemy1BulletSpawnerTests
 		//Arrange
 		var frogPlayer = TestGameObject.GetNew();
 		frogPlayer.transform.position = FrogPlayerPosition;
-
-		var enemy1 = TestGameObject.GetNew();
-		enemy1.transform.position = new Vector3(5, 15, 0);
-		Spawner.OnEnemy1Moved(new Enemy1MovedSignal(enemy1));
-		Spawner.OnFrogPlayerMoved(new FrogPlayerMovedSignal(frogPlayer, default));
 		//Act
-		Spawner.Spawn();
+		var enemy1Position = new Vector3(5, 15, 0);
+		Spawner.Spawn(enemy1Position);
 		//Assert
-		var normalizedDirection = (frogPlayer.transform.position - enemy1.transform.position).normalized;
+		var normalizedDirection = (frogPlayer.transform.position - enemy1Position).normalized;
 		var direction2d = new Vector2(normalizedDirection.x, normalizedDirection.y);
 		Assert.AreEqual(direction2d * SpeedInUnitsPerSecond, Enemy1BulletFactorySpy.CreatedObject.GetComponent<Rigidbody2D>().velocity);
 	}

@@ -8,12 +8,12 @@ public class GameControllerTests
 	{
 		//Arrange
 		var enemy1SpawnerSpy = new Enemy1SpawnerSpy();
-		var enemy1BulletSpawnerSpy = new Enemy1BulletSpawnerSpy();
-		var gameController = new GameController(enemy1SpawnerSpy, enemy1BulletSpawnerSpy);
+		//var enemy1BulletSpawnerSpy = new Enemy1BulletSpawnerSpy();
+		var gameController = new GameController(enemy1SpawnerSpy);
 		//Act
 		gameController.Initialize();
 		//Assert
 		Assert.IsTrue(enemy1SpawnerSpy.IsSpawned);
-		Assert.IsTrue(enemy1BulletSpawnerSpy.IsSpawned);
+		//Assert.IsTrue(enemy1BulletSpawnerSpy.IsSpawned);
 	}
 }

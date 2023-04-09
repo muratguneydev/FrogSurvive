@@ -1,4 +1,5 @@
 using FrogSurvive.Enemy1;
+using UnityEngine;
 
 public class Enemy1BulletSpawnerSpy : Enemy1BulletSpawner
 {
@@ -7,7 +8,7 @@ public class Enemy1BulletSpawnerSpy : Enemy1BulletSpawner
 	{
 	}
 
-	public override void Spawn()
+	public override void Spawn(Vector3 enemy1Position)
 	{
 		IsSpawned = true;
 	}

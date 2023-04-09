@@ -30,13 +30,13 @@ public class Enemy1SpawnerTests
 		Assert.AreEqual(Enemy1Settings.SpawnPosition, Enemy1FactorySpy.CreatedObject.transform.position);
 	}
 
-	[Test]
-	public void Should_RaiseEvent_WhenSpawned()
-	{
-		//Act
-		Spawner.Spawn();
-		//Assert
-		var (isFired, _) = EventBusSpy.IsExpectedEventFired();
-		Assert.IsTrue(isFired);
-	}
+	// [Test]
+	// public void Should_RaiseEvent_WhenSpawned()
+	// {
+	// 	//Act
+	// 	Spawner.Spawn();
+	// 	//Assert
+	// 	var (isFired, _) = EventBusSpy.IsExpectedEventFired();
+	// 	Assert.IsTrue(isFired);
+	// }
 }
