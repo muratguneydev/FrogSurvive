@@ -1,6 +1,7 @@
 using System.Collections;
 using FrogSurvive.Enemy1;
 using NUnit.Framework;
+using Scripts;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Zenject;
@@ -15,7 +16,7 @@ public class GameControllerTests : ZenjectIntegrationTestFixture
 		//Act
 		yield return null;
 		//Assert
-		Assert.AreEqual(Enemy1Installer.Enemy1GameObjectName, GameObject.FindFirstObjectByType<Enemy1Behaviour>().gameObject.name);
+		Assert.AreEqual(Constants.Enemy1GameObjectName, GameObject.FindFirstObjectByType<Enemy1Behaviour>().gameObject.name);
 	}
 
 	private TestDependencyInstaller SetUp()

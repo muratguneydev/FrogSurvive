@@ -14,6 +14,7 @@ public class CoreInstaller : Installer
 		Container.Bind<GameObjectDestroyer>().AsSingle();
 		Container.BindInterfacesAndSelfTo<GameController>().AsSingle();
 
+		Container.Bind<HitTheWallUISignalFactory>().AsSingle();
 		Container.DeclareSignal<HitTheWallUISignal>();
 		Container.BindSignal<HitTheWallUISignal>()
             .ToMethod<GameController>(x => x.OnHitTheWall)

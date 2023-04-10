@@ -16,14 +16,15 @@ public class GameControllerTests
 		Assert.IsTrue(Enemy1SpawnerSpy.IsSpawned);
 	}
 
-	[Test]
-	public void ShouldDestroyObject_WhenHitTheWallEventReceived()
+	[TestCase(true, true)]
+	[TestCase(false, false)]
+	public void ShouldDestroyObject_WhenHitTheWallEventReceived(bool isDestroyable, bool expectedDestroyedResult)
 	{
 		//Arrange
 		var gameObjectHit = TestGameObject.GetNew();
 		//Act
-		GameController.OnHitTheWall(new HitTheWallUISignal(gameObjectHit));
+		GameController.OnHitTheWall(new HitTheWallUISignal(gameObjectHit, isDestroyable));
 		//Assert
-		Assert.IsTrue(GameObjectDestroyerSpy.IsDestroyed(gameObjectHit));
+		Assert.AreEqual(expectedDestroyedResult, GameObjectDestroyerSpy.IsDestroyed(gameObjectHit));
 	}
 }
