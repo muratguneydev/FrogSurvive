@@ -1,19 +1,29 @@
 using FrogSurvive.Controllers;
+using FrogSurvive.Events;
 using NUnit.Framework;
 
 public class GameControllerTests
 {
+	private static readonly Enemy1SpawnerSpy Enemy1SpawnerSpy = new Enemy1SpawnerSpy();
+	private static readonly GameObjectDestroyerSpy GameObjectDestroyerSpy = new GameObjectDestroyerSpy();
+	private static readonly GameController GameController = new GameController(Enemy1SpawnerSpy, GameObjectDestroyerSpy);
 	[Test]
-	public void ShouldSpawnEnemy1()
+	public void ShouldSpawnEnemy1_WhenInitialized()
+	{
+		//Act
+		GameController.Initialize();
+		//Assert
+		Assert.IsTrue(Enemy1SpawnerSpy.IsSpawned);
+	}
+
+	[Test]
+	public void ShouldDestroyObject_WhenHitTheWallEventReceived()
 	{
 		//Arrange
-		var enemy1SpawnerSpy = new Enemy1SpawnerSpy();
-		//var enemy1BulletSpawnerSpy = new Enemy1BulletSpawnerSpy();
-		var gameController = new GameController(enemy1SpawnerSpy);
+		var gameObjectHit = TestGameObject.GetNew();
 		//Act
-		gameController.Initialize();
+		GameController.OnHitTheWall(new HitTheWallUISignal(gameObjectHit));
 		//Assert
-		Assert.IsTrue(enemy1SpawnerSpy.IsSpawned);
-		//Assert.IsTrue(enemy1BulletSpawnerSpy.IsSpawned);
+		Assert.IsTrue(GameObjectDestroyerSpy.IsDestroyed(gameObjectHit));
 	}
 }

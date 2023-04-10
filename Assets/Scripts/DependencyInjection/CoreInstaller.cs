@@ -11,6 +11,12 @@ public class CoreInstaller : Installer
 		Container.Bind<IEventBus>().To<EventBus>().AsSingle();
 
 		Container.Bind<KeyInput>().AsSingle();
+		Container.Bind<GameObjectDestroyer>().AsSingle();
 		Container.BindInterfacesAndSelfTo<GameController>().AsSingle();
+
+		Container.DeclareSignal<HitTheWallUISignal>();
+		Container.BindSignal<HitTheWallUISignal>()
+            .ToMethod<GameController>(x => x.OnHitTheWall)
+			.FromResolve();
 	}
 }
