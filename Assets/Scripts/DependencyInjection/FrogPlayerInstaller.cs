@@ -27,6 +27,14 @@ public class FrogPlayerInstaller : Installer<FrogPlayerSettings, FrogPlayerInsta
             .ToMethod<Enemy1BulletSpawner>(x => x.OnFrogPlayerMoved)
 			.FromResolve();
 
+		Container.Bind<FrogPlayerHealthManager>().AsSingle();
+
+		Container.DeclareSignal<FrogPlayerHitUISignal>();
+		Container.BindSignal<FrogPlayerHitUISignal>()
+            .ToMethod<FrogPlayerHealthManager>(x => x.OnHitByAnObject)
+			.FromResolve();
+		
+
 		Container.Bind<SpriteHorizontalDirectionManager>().AsSingle();
 		Container.Bind<FrogPlayerAnimatorManager>().AsSingle();
 		

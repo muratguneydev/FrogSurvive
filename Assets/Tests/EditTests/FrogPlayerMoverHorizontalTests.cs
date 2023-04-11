@@ -8,24 +8,24 @@ public class FrogPlayerMoverHorizontalTests
     public void Should_MoveToRight_WhenRightKeyDown()
 	{
 		//Arrange
-		var horizontalMover = FrogPlayerMoverTestHelper.GetMover(KeyInputStub.Right);
+		var horizontalMover = TestFrogPlayerMover.GetNew(KeyInputStub.Right);
 		var rigidBody = TestRigidBody.GetNew();
 		//Act
 		horizontalMover.Move(rigidBody);
 		//Assert
-		Assert.AreEqual(Vector2.right * FrogPlayerMoverTestHelper.VelocityMoveUnitsPerSecond, rigidBody.velocity);
+		Assert.AreEqual(Vector2.right * TestFrogPlayerMover.VelocityMoveUnitsPerSecond, rigidBody.velocity);
 	}
 
 	[Test]
     public void Should_MoveToLeft_WhenLeftKeyDown()
 	{
 		//Arrange
-		var horizontalMover = FrogPlayerMoverTestHelper.GetMover(KeyInputStub.Left);
+		var horizontalMover = TestFrogPlayerMover.GetNew(KeyInputStub.Left);
 		var rigidBody = TestRigidBody.GetNew();
 		//Act
 		horizontalMover.Move(rigidBody);
 		//Assert
-		Assert.AreEqual(Vector2.left * FrogPlayerMoverTestHelper.VelocityMoveUnitsPerSecond, rigidBody.velocity);
+		Assert.AreEqual(Vector2.left * TestFrogPlayerMover.VelocityMoveUnitsPerSecond, rigidBody.velocity);
 	}
 
 	[Test]
@@ -33,7 +33,7 @@ public class FrogPlayerMoverHorizontalTests
 	{
 		//Arrange
 		var eventBusSpy = new EventBusSpy<FrogPlayerMovedSignal>();
-		var horizontalMover = FrogPlayerMoverTestHelper.GetMover(eventBusSpy, KeyInputStub.Right);
+		var horizontalMover = TestFrogPlayerMover.GetNew(eventBusSpy, KeyInputStub.Right);
 		//Act
 		horizontalMover.Move(TestRigidBody.GetNew());
 		//Assert
@@ -47,7 +47,7 @@ public class FrogPlayerMoverHorizontalTests
 	{
 		//Arrange
 		var eventBusSpy = new EventBusSpy<FrogPlayerMovedSignal>();
-		var horizontalMover = FrogPlayerMoverTestHelper.GetMover(eventBusSpy, KeyInputStub.Left);
+		var horizontalMover = TestFrogPlayerMover.GetNew(eventBusSpy, KeyInputStub.Left);
 		//Act
 		horizontalMover.Move(TestRigidBody.GetNew());
 		//Assert

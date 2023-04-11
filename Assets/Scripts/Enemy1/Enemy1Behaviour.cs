@@ -25,14 +25,14 @@ namespace FrogSurvive.Enemy1
 			InvokeRepeating(nameof(RepeatSpawn), 0, 2);
 		}
 
-		void FixedUpdate()
-		{
-			//We can change this to only fire if the current position is different than the previous position.
-			//And this can be done in a Enemy1Mover class.
-			//Not required now as we know that Enemy1 always moves.
+		// void FixedUpdate()
+		// {
+		// 	//We can change this to only fire if the current position is different than the previous position.
+		// 	//And this can be done in a Enemy1Mover class.
+		// 	//Not required now as we know that Enemy1 always moves.
 			
-			//_eventBus.Fire(new Enemy1MovedSignal(gameObject));
-		}
+		// 	//_eventBus.Fire(new Enemy1MovedSignal(gameObject));
+		// }
 
 		private void RepeatSpawn()
 		{

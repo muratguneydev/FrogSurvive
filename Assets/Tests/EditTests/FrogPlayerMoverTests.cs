@@ -6,7 +6,7 @@ public class FrogPlayerMoverTests
     public void Should_NotMove_WhenThereIsNoMovementKeyDown()
 	{
 		//Arrange
-		var mover = FrogPlayerMoverTestHelper.GetMover(KeyInputStub.None);
+		var mover = TestFrogPlayerMover.GetNew(KeyInputStub.None);
 		var rigidBody = TestRigidBody.GetNew();
 		var originalVelocity = rigidBody.velocity;
 		var originalX = rigidBody.position.x;

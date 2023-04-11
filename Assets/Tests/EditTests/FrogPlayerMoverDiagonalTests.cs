@@ -7,12 +7,12 @@ public class FrogPlayerMoverDiagonalTests
     public void Should_MoveDiagonal_WhenUpRightKeyDown()
 	{
 		//Arrange
-		var mover = FrogPlayerMoverTestHelper.GetMover(KeyInputStub.UpRight);
+		var mover = TestFrogPlayerMover.GetNew(KeyInputStub.UpRight);
 		var rigidBody = TestRigidBody.GetNew();
 		//Act
 		mover.Move(rigidBody);
 		//Assert
-		var expectedVelocity = (Vector2.up + Vector2.right).normalized * FrogPlayerMoverTestHelper.VelocityMoveUnitsPerSecond;
+		var expectedVelocity = (Vector2.up + Vector2.right).normalized * TestFrogPlayerMover.VelocityMoveUnitsPerSecond;
 		Assert.AreEqual(expectedVelocity, rigidBody.velocity);
 	}
 
@@ -20,12 +20,12 @@ public class FrogPlayerMoverDiagonalTests
     public void Should_MoveDiagonal_WhenUpLeftKeyDown()
 	{
 		//Arrange
-		var mover = FrogPlayerMoverTestHelper.GetMover(KeyInputStub.UpLeft);
+		var mover = TestFrogPlayerMover.GetNew(KeyInputStub.UpLeft);
 		var rigidBody = TestRigidBody.GetNew();
 		//Act
 		mover.Move(rigidBody);
 		//Assert
-		var expectedVelocity = (Vector2.up + Vector2.left).normalized * FrogPlayerMoverTestHelper.VelocityMoveUnitsPerSecond;
+		var expectedVelocity = (Vector2.up + Vector2.left).normalized * TestFrogPlayerMover.VelocityMoveUnitsPerSecond;
 		Assert.AreEqual(rigidBody.velocity, expectedVelocity);
 	}
 }
