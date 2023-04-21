@@ -1,8 +1,3 @@
-using System.Collections;
-using FrogSurvive.Enemy1;
-using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
 using Zenject;
 
 public class Enemy1BulletBehaviourTests : ZenjectIntegrationTestFixture

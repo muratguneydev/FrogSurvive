@@ -21,5 +21,5 @@ namespace Scripts
 			_eventBus.Fire(_hitTheWallUISignalFactory.Get(collision.gameObject));
 		}
 	}
-
 }
+

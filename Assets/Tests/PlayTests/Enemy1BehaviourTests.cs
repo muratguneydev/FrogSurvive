@@ -1,6 +1,5 @@
 using System.Collections;
 using FrogSurvive.Enemy1;
-using FrogSurvive.Events;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;

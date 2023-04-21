@@ -1,6 +1,7 @@
 using FrogSurvive.Enemy1;
 using FrogSurvive.Events;
 using FrogSurvive.FrogPlayer;
+using Scripts;
 using Zenject;
 
 public class FrogPlayerInstaller : Installer<FrogPlayerSettings, FrogPlayerInstaller>
@@ -11,6 +12,7 @@ public class FrogPlayerInstaller : Installer<FrogPlayerSettings, FrogPlayerInsta
 	{
 		_frogPlayerSettings = frogPlayerSettings;
 	}
+
 	public override void InstallBindings()
 	{
 		Container.Bind<FrogPlayerMover>().AsSingle();
@@ -28,6 +30,10 @@ public class FrogPlayerInstaller : Installer<FrogPlayerSettings, FrogPlayerInsta
 			.FromResolve();
 
 		Container.Bind<FrogPlayerHealthManager>().AsSingle();
+		Container.DeclareSignal<FrogPlayerDiedSignal>();
+		// Container.BindSignal<FrogPlayerDiedSignal>()
+        //     .ToMethod<GameOverBehaviour>(x => x.OnFrogPlayerDied)
+		// 	.FromResolve();
 
 		Container.DeclareSignal<FrogPlayerHitUISignal>();
 		Container.BindSignal<FrogPlayerHitUISignal>()

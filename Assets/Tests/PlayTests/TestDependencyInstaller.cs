@@ -5,6 +5,7 @@ using Scripts;
 using UnityEditor.Animations;
 using UnityEngine;
 using Zenject;
+using FrogSurvive.Controllers;
 
 public class TestDependencyInstaller
 {
@@ -16,20 +17,38 @@ public class TestDependencyInstaller
 	private readonly Enemy1BulletSettings _enemy1BulletSettings;
 
 	public TestDependencyInstaller(DiContainer container, KeyInput keyInput, Enemy1Settings enemy1Settings, Enemy1BulletSettings enemy1BulletSettings)
+		//GameSettings gameSettings)
 	{
 		_container = container;
 		_keyInput = keyInput;
 		_enemy1Settings = enemy1Settings;
 		_enemy1BulletSettings = enemy1BulletSettings;
+		//GameSettings = gameSettings;
 	}
 
 	public TestDependencyInstaller(DiContainer container, KeyInput keyInput)
 		: this(container, keyInput,
 				new Enemy1Settings(new Velocity(10, Vector2.down), Vector3.zero, PrefabFactory.Enemy1),
 				new Enemy1BulletSettings(10f, PrefabFactory.Enemy1Bullet))
+				//new GameSettingsStub(TestGameObject.GetNew()))
 	{
 		
 	}
+
+	public TestDependencyInstaller(DiContainer container)
+		: this(container, KeyInputStub.None)
+	{
+
+	}
+
+	// public TestDependencyInstaller(DiContainer container, GameSettings gameSettings)
+	// 	: this(container, KeyInputStub.None,
+	// 			new Enemy1Settings(new Velocity(10, Vector2.down), Vector3.zero, PrefabFactory.Enemy1),
+	// 			new Enemy1BulletSettings(10f, PrefabFactory.Enemy1Bullet),
+	// 			gameSettings)
+	// {
+		
+	// }
 
 	public void Install()
 	{
@@ -40,6 +59,7 @@ public class TestDependencyInstaller
 	public FrogPlayerBehaviour FrogPlayerBehaviour => _container.Resolve<FrogPlayerBehaviour>();
 	public GameObject FrogPlayerGameObject => FrogPlayerBehaviour.gameObject;
 	public IEventBus EventBus => _container.Resolve<IEventBus>();
+	public GameController GameController => _container.Resolve<GameController>();
 
 	private void RegisterDependencies()
 	{
@@ -49,6 +69,8 @@ public class TestDependencyInstaller
 
 		_container.Rebind<KeyInput>().FromInstance(_keyInput);//For non-interface types, rebind cannot be AsSingle.
 		_container.Bind<FrogPlayerBehaviour>().FromNewComponentOnNewGameObject()
+			.AsSingle();
+		_container.Bind<GameOverBehaviour>().FromNewComponentOnNewGameObject()
 			.AsSingle();
 	}
 

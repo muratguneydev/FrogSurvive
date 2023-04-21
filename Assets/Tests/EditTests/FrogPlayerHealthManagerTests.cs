@@ -5,11 +5,13 @@ using Scripts;
 
 public class FrogPlayerHealthManagerTests
 {
+	private static readonly FrogPlayerSettings FrogPlayerSettings = new FrogPlayerSettings(horizontalVelocity: 10);
+
 	[Test]
 	public void ShouldHave100PercentHealth_WhenStarted()
 	{
 		//Act
-		var frogPlayerHealthManager = new FrogPlayerHealthManager(new EventBusDummy());
+		var frogPlayerHealthManager = new FrogPlayerHealthManager(new EventBusDummy(), FrogPlayerSettings);
 		//Assert
 		Assert.AreEqual(100, frogPlayerHealthManager.RemainingHealth);
 	}
@@ -18,7 +20,7 @@ public class FrogPlayerHealthManagerTests
 	public void ShouldRemove20PercentHealth_WhenHitByABullet()
 	{
 		//Arrange
-		var frogPlayerHealthManager = new FrogPlayerHealthManager(new EventBusDummy());
+		var frogPlayerHealthManager = new FrogPlayerHealthManager(new EventBusDummy(), FrogPlayerSettings);
 		var gameObjectHit = TestGameObject.GetNew(Constants.Enemy1BulletGameObjectName);
 		//Act
 		frogPlayerHealthManager.OnHitByAnObject(new FrogPlayerHitUISignal(gameObjectHit));
@@ -35,7 +37,7 @@ public class FrogPlayerHealthManagerTests
 	public void ShouldNotRemoveHealth_WhenHitByANonBullet()
 	{
 		//Arrange
-		var frogPlayerHealthManager = new FrogPlayerHealthManager(new EventBusDummy());
+		var frogPlayerHealthManager = new FrogPlayerHealthManager(new EventBusDummy(), FrogPlayerSettings);
 		var gameObjectHit = TestGameObject.GetNew();
 		//Act
 		frogPlayerHealthManager.OnHitByAnObject(new FrogPlayerHitUISignal(gameObjectHit));
@@ -48,7 +50,7 @@ public class FrogPlayerHealthManagerTests
 	{
 		//Arrange
 		var eventBusSpy = new EventBusSpy<FrogPlayerDiedSignal>();
-		var frogPlayerHealthManager = new FrogPlayerHealthManager(eventBusSpy);
+		var frogPlayerHealthManager = new FrogPlayerHealthManager(eventBusSpy, FrogPlayerSettings);
 		var gameObjectHit = TestGameObject.GetNew(Constants.Enemy1BulletGameObjectName);
 		//Act
 		var hittingObject = new FrogPlayerHitUISignal(gameObjectHit);
