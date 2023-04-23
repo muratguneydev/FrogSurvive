@@ -7,7 +7,8 @@ public class FrogPlayerAnimatorManagerTests
 {
 	private const string VerticalMoveParameter = "isPlayerMovingVertically";
 	private const string HorizontalMoveParameter = "isPlayerMovingHorizontally";
-	private const string AnimatorControllerAssetPath = "Assets/Animations/PlayerHorizontalController.controller";
+	private const string PlayerDeadParameter = "isPlayerDead";
+	private const string AnimatorControllerAssetPath = "Assets/Animations/FrogPlayerController.controller";
 
 	[Test]
 	public void Should_ActivateVerticalMoveAnimation_WhenMovingUp()
@@ -55,6 +56,18 @@ public class FrogPlayerAnimatorManagerTests
 		sut.OnFrogPlayerMoved(new FrogPlayerMovedSignal(gameObject, Vector2.left));
 		//Assert
 		Assert.IsTrue(gameObject.GetComponent<Animator>().GetBool(HorizontalMoveParameter));
+	}
+
+	[Test]
+	public void Should_ActivatePlayerDeadAnimation_WhenPlayerDeadEventReceived()
+	{
+		//Arrange
+		var sut = new FrogPlayerAnimatorManager();
+		var gameObject = PopulateGameObject();
+		//Act
+		sut.OnFrogPlayerDied(new FrogPlayerDiedSignal(gameObject));
+		//Assert
+		Assert.IsTrue(gameObject.GetComponent<Animator>().GetBool(PlayerDeadParameter));
 	}
 
 	private static GameObject PopulateGameObject()

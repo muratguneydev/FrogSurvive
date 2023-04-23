@@ -13,7 +13,7 @@ namespace FrogSurvive.FrogPlayer
 																					frogPlayerMovedSignal.FrogPlayer.transform.localScale.z);
 		}
 
-		private bool DirectionChanged(float x1, float x2)
-			=> x1 * x2 < 0;
+		private bool DirectionChanged(float currentScaleX, float normalizedDirectionX)
+			=> currentScaleX * normalizedDirectionX < 0;
 	}
 }

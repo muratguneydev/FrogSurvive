@@ -31,9 +31,9 @@ public class FrogPlayerInstaller : Installer<FrogPlayerSettings, FrogPlayerInsta
 
 		Container.Bind<FrogPlayerHealthManager>().AsSingle();
 		Container.DeclareSignal<FrogPlayerDiedSignal>();
-		// Container.BindSignal<FrogPlayerDiedSignal>()
-        //     .ToMethod<GameOverBehaviour>(x => x.OnFrogPlayerDied)
-		// 	.FromResolve();
+		Container.BindSignal<FrogPlayerDiedSignal>()
+            .ToMethod<FrogPlayerAnimatorManager>(x => x.OnFrogPlayerDied)
+			.FromResolve();
 
 		Container.DeclareSignal<FrogPlayerHitUISignal>();
 		Container.BindSignal<FrogPlayerHitUISignal>()
