@@ -10,7 +10,7 @@ using FrogSurvive.Controllers;
 public class TestDependencyInstaller
 {
 	const int FrogHorizontalVelocityUnitsPerSecond = 10;
-	private const string AnimatorControllerAssetPath = "Assets/Animations/PlayerHorizontalController.controller";
+	private const string AnimatorControllerAssetPath = "Assets/Animations/FrogPlayerController.controller";
 	private readonly DiContainer _container;
 	private readonly KeyInput _keyInput;
 	private readonly Enemy1Settings _enemy1Settings;
@@ -60,6 +60,9 @@ public class TestDependencyInstaller
 	public GameObject FrogPlayerGameObject => FrogPlayerBehaviour.gameObject;
 	public IEventBus EventBus => _container.Resolve<IEventBus>();
 	public GameController GameController => _container.Resolve<GameController>();
+
+	public GameOverBehaviour GameOverBehaviour => _container.Resolve<GameOverBehaviour>();
+	public GameObject GameOverGameObject => GameOverBehaviour.gameObject;
 
 	private void RegisterDependencies()
 	{
