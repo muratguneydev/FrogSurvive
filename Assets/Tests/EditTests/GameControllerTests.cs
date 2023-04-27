@@ -8,8 +8,9 @@ public class GameControllerTests
 	private static readonly GameObjectDestroyerSpy GameObjectDestroyerSpy = new();
 	private static readonly SceneManagerWrapperSpy SceneManagerWrapperSpy = new();
 	private static EventBusSpy<GameResetSignal> EventBusSpy = new();
+	//private static RealTimeTicker<Enemy1Behaviour> Enemy1BulletSpawnTicker = new(10000, null, new DeltaTimeFake(10));
 	private static readonly GameController GameController = new GameController(Enemy1SpawnerSpy, GameObjectDestroyerSpy, SceneManagerWrapperSpy,
-		EventBusSpy);
+		EventBusSpy);//, Enemy1BulletSpawnTicker);
 
 	[Test]
 	public void ShouldSpawnEnemy1_WhenInitialized()

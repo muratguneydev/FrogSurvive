@@ -1,83 +1,45 @@
+using System;
 using UnityEngine;
-using Zenject;
 
 namespace Scripts
 {
 	//To avoid dependency on the play mode and creating MonoBehavour objects, we use Zenject's interfaces. Tick() is the same as MonoBevour's Update and Initialize as Start.
-	public class RealTimeTicker : ITickable
+	public class RealTimeTicker
 	{
-		private readonly float _requiredElapsedSecondsForTrigger;
-		private readonly IInvokable _invokable;
+		private float _tickInterval = float.MaxValue;
+		private Action _onTick = DefaultTickAction;
 		private readonly DeltaTime _deltaTime;
 		private float _currentElapsedSeconds;
+		private bool _isEnabled;
 
-		public RealTimeTicker(float requiredElapsedSecondsForTrigger, IInvokable invokable, DeltaTime deltaTime)
-		{
-			Debug.Log($"RealTimeTicker constructed with invokable of {invokable}");
-			_requiredElapsedSecondsForTrigger = requiredElapsedSecondsForTrigger;
-			_invokable = invokable;
-			_deltaTime = deltaTime;
-		}
+		public RealTimeTicker(DeltaTime deltaTime) => _deltaTime = deltaTime;
+
+		public void Set(float tickInterval) => _tickInterval = tickInterval;
+
+		public void Set(Action onTick) => _onTick = onTick;
+
+		public void Reset() => _isEnabled = true;
+
+		public void Cancel() => _isEnabled = false;
 
 		public void Tick()
 		{
-			UpdateCurrentElapsedSeconds(_deltaTime.GetSeconds());
-			if (_currentElapsedSeconds < _requiredElapsedSecondsForTrigger)
+			if (!_isEnabled)
 				return;
-			
-			_invokable.Invoke();
+
+			UpdateCurrentElapsedSeconds(_deltaTime.GetSeconds());
+			if (_currentElapsedSeconds < _tickInterval)
+				return;
+
+			_onTick();
 			ResetCurrentElapsedSeconds();
 		}
 
-		private void ResetCurrentElapsedSeconds()
-		{
-			_currentElapsedSeconds = 0;
-		}
+		//private bool IsTimerSet() => _tickInterval != default && _onTick != default;
 
-		private void UpdateCurrentElapsedSeconds(float deltaTimeInSeconds)
-		{
-			_currentElapsedSeconds += deltaTimeInSeconds;
-		}
-	}
+		private void ResetCurrentElapsedSeconds() => _currentElapsedSeconds = 0;
 
-	public class RealTimeTicker<TInvokable> : RealTimeTicker where TInvokable : IInvokable
-	{
-		// private readonly float _requiredElapsedSecondsForTrigger;
-		// private readonly TInvokable _invokable;
-		// private readonly DeltaTime _deltaTime;
-		// private float _currentElapsedSeconds;
-
-		// public RealTimeTicker(float requiredElapsedSecondsForTrigger, TInvokable invokable, DeltaTime deltaTime)
-		// {
-		// 	Debug.Log($"RealTimeTicker constructed with invokable of {invokable}");
-		// 	_requiredElapsedSecondsForTrigger = requiredElapsedSecondsForTrigger;
-		// 	_invokable = invokable;
-		// 	_deltaTime = deltaTime;
-		// }
-
-		public RealTimeTicker(float requiredElapsedSecondsForTrigger, TInvokable invokable, DeltaTime deltaTime)
-			: base(requiredElapsedSecondsForTrigger, invokable, deltaTime)
-		{
-		}
-
-		// public void Tick()
-		// {
-		// 	UpdateCurrentElapsedSeconds(_deltaTime.GetSeconds());
-		// 	if (_currentElapsedSeconds < _requiredElapsedSecondsForTrigger)
-		// 		return;
-
-		// 	_invokable.Invoke();
-		// 	ResetCurrentElapsedSeconds();
-		// }
-
-		// private void ResetCurrentElapsedSeconds()
-		// {
-		// 	_currentElapsedSeconds = 0;
-		// }
-
-		// private void UpdateCurrentElapsedSeconds(float deltaTimeInSeconds)
-		// {
-		// 	_currentElapsedSeconds += deltaTimeInSeconds;
-		// }
+		private void UpdateCurrentElapsedSeconds(float deltaTimeInSeconds) => _currentElapsedSeconds += deltaTimeInSeconds;
+		private static Action DefaultTickAction = () => { Debug.Log("default tick action");};
 	}
 }

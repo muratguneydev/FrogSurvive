@@ -16,6 +16,13 @@ public class Enemy1Installer : Installer<Enemy1Settings, Enemy1BulletSettings, E
 	{
 		Container.Bind<Enemy1Spawner>().AsSingle();
 		Container.Bind<Enemy1BulletSpawner>().AsSingle();
+		//Container.Bind<RealTimeTicker<Enemy1Behaviour>>().AsSingle();
+		//Container.BindInstance(_enemy1BulletSettings.SpawnIntervalInSeconds).WhenInjectedInto<RealTimeTicker<Enemy1Behaviour>>();
+		//Container.Bind(typeof(ITickable), typeof(RealTimeTicker)).WithId("Enemy1BehaviourTicker").To<RealTimeTicker>().AsSingle();
+		// Container.BindInterfacesTo<RealTimeTicker>().AsTransient();
+		// Container.Bind<RealTimeTicker>().FromMethod(ctx => ctx.Container.Resolve<IRealTimeTicker>());
+		Container.BindInterfacesAndSelfTo<Enemy1BulletSpawnerTicker>().AsSingle();
+
 
 		Container.BindFactoryCustomInterface<Enemy1Behaviour, Enemy1Behaviour.Factory, IFactory<Enemy1Behaviour>>()
 				// This means that any time Xxx.Factory.Create is called, it will instantiate

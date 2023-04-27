@@ -29,7 +29,7 @@ public class TestDependencyInstaller
 	public TestDependencyInstaller(DiContainer container, KeyInput keyInput)
 		: this(container, keyInput,
 				new Enemy1Settings(new Velocity(10, Vector2.down), Vector3.zero, PrefabFactory.Enemy1),
-				new Enemy1BulletSettings(10f, PrefabFactory.Enemy1Bullet))
+				new Enemy1BulletSettings(10f, PrefabFactory.Enemy1Bullet, 2f))
 				//new GameSettingsStub(TestGameObject.GetNew()))
 	{
 		
@@ -64,6 +64,9 @@ public class TestDependencyInstaller
 	public GameOverBehaviour GameOverBehaviour => _container.Resolve<GameOverBehaviour>();
 	public GameObject GameOverGameObject => GameOverBehaviour.gameObject;
 
+	public Enemy1Behaviour Enemy1Behaviour => _container.Resolve<Enemy1Behaviour>();
+
+
 	private void RegisterDependencies()
 	{
 		_container.Install<CoreInstaller>();
@@ -85,7 +88,7 @@ public class TestDependencyInstaller
 		_container.BindInstance(_enemy1Settings);
 		_container.BindInstance(_enemy1BulletSettings);
 		Enemy1Installer.Install(_container, _enemy1Settings, _enemy1BulletSettings);
-		_container.Bind<Enemy1Behaviour>().AsSingle();
+		_container.Bind<Enemy1Behaviour>().FromNewComponentOnNewGameObject().AsSingle();
 		_container.Bind<Enemy1BulletBehaviour>().AsSingle();
 
 		//REbind interfaces???

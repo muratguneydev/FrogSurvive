@@ -1,4 +1,5 @@
 using FrogSurvive.Events;
+using Scripts;
 using UnityEngine;
 using Zenject;
 
@@ -8,7 +9,6 @@ namespace FrogSurvive.Enemy1
 	{
 		private readonly IFactory<Enemy1BulletBehaviour> _enemy1BulletFactory;
 		private readonly Enemy1BulletSettings _enemy1BulletSettings;
-		//private Vector3 _currentEnemy1Position;
 		private Vector3 _currentFrogPlayerPosition = new Vector3(-2.25f, -5.45f, 0);
 
 		public Enemy1BulletSpawner(IFactory<Enemy1BulletBehaviour> enemy1BulletFactory, Enemy1BulletSettings enemy1BulletSettings)
@@ -17,16 +17,6 @@ namespace FrogSurvive.Enemy1
 			_enemy1BulletSettings = enemy1BulletSettings;
 		}
 
-		// public void OnEnemy1Moved(Enemy1MovedSignal enemy1MovedSignal)
-		// {
-		// 	_currentEnemy1Position = enemy1MovedSignal.Enemy1.transform.position;
-		// }
-
-		// public void OnEnemy1Spawned(Enemy1SpawnedSignal enemy1SpawnedSignal)
-		// {
-		// 	_currentEnemy1Position = enemy1SpawnedSignal.Enemy1.transform.position;
-		// }
-
 		public void OnFrogPlayerMoved(FrogPlayerMovedSignal frogPlayerMovedSignal)
 		{
 			_currentFrogPlayerPosition = frogPlayerMovedSignal.FrogPlayer.transform.position;
@@ -34,6 +24,7 @@ namespace FrogSurvive.Enemy1
 
 		public virtual void Spawn(Vector3 enemy1Position)
 		{
+			//Debug.Log("Spawned bullet...");
 			var enemy1BulletBehaviour = _enemy1BulletFactory.Create();
 			enemy1BulletBehaviour.gameObject.transform.position = GetBulletSpawnPosition(enemy1Position);
 

@@ -6,8 +6,10 @@ using UnityEngine;
 public class Enemy1BulletSpawnerTests
 {
 	private const float SpeedInUnitsPerSecond = 10f;
+	private const float SpawnIntervalInSeconds = 2f;
 	private static Vector3 FrogPlayerPosition = new Vector3(25, 3, 0);
-	private static Enemy1BulletSettings Enemy1BulletSettings = new Enemy1BulletSettings(SpeedInUnitsPerSecond, TestGameObject.GetNew());
+	private static Enemy1BulletSettings Enemy1BulletSettings = new Enemy1BulletSettings(SpeedInUnitsPerSecond, TestGameObject.GetNew(),
+																		SpawnIntervalInSeconds);
 	private static FactorySpy<Enemy1BulletBehaviour> Enemy1BulletFactorySpy = new FactorySpy<Enemy1BulletBehaviour>();
 	private static Enemy1BulletSpawner Spawner = new Enemy1BulletSpawner(Enemy1BulletFactorySpy, Enemy1BulletSettings);
 
