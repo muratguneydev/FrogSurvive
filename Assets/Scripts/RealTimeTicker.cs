@@ -18,7 +18,11 @@ namespace Scripts
 
 		public void Set(Action onTick) => _onTick = onTick;
 
-		public void Reset() => _isEnabled = true;
+		public void Reset()//TODO:Add tests for this.
+		{
+			_isEnabled = true;
+			_currentElapsedSeconds = 0;
+		}
 
 		public void Cancel() => _isEnabled = false;
 
